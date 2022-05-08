@@ -66,7 +66,7 @@
          }
     };
     params.append("result",localStorage.getItem("result"))
-    xhttp.open("POST", "http://localhost:3000/recieve_posts_ui", true);
+    xhttp.open("POST", "https://shielded-badlands-29343.herokuapp.com/", true);
     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     // xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send('user='+localStorage.getItem("result"));
