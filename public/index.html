@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+
+  <script>    
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '4722675014509379',
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v2.6'
+      });  
+      FB.AppEvents.logPageView();      
+    };
+
+    function checkLoginState() {
+      FB.getLoginStatus(function(response) {
+        console.log(response);
+        FB.api('/me/feed',function(response) {
+          console.log(response.data);
+          var res = JSON.stringify(response.data);
+          localStorage.setItem("result",res)
+        })  
+      });
+    }
+
+    function fbLogout() {
+      FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+          FB.logout(function (response) {
+            console.log(response);
+          });
+        }
+      });
+    }
+
+    (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    function UserAction() {
+    var xhttp = new XMLHttpRequest();
+    let params = new URLSearchParams;
+    xhttp.onreadystatechange = function() {
+         if (this.readyState == 4 && this.status == 200) {
+             alert(this.responseText);
+         }
+    };
+    params.append("result",localStorage.getItem("result"))
+    xhttp.open("POST", "http://localhost:3000/recieve_posts_ui", true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    // xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send('user='+localStorage.getItem("result"));
+    }
+  </script>
+    <fb:login-button scope="public_profile,email"onlogin="checkLoginState();"></fb:login-button>
+    <br/><br/>
+    <button type="submit" value="submit" onclick="UserAction()">Submit</button>
+    <br/><br/>
+    <button type="logout" value="logout" onclick="fbLogout()">Logout</button>
+  </body>
+</html>
