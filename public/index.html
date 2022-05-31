@@ -11,7 +11,27 @@
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>React App</title>
+    <title>Movie Recommendation System (Social media posts)</title>
+    <style>
+
+      body{
+        background-color: white;
+      }
+
+      button {
+        background-color: slateblue; /* Green */
+        border: none;
+        color: white;
+        padding: 8px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 0.3em;
+        margin-left: 30%;
+      }
+
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -20,7 +40,7 @@
   <script>    
     window.fbAsyncInit = function() {
       FB.init({
-        appId      : '4722675014509379',
+        appId      : '686581165772458',
         cookie     : true,
         xfbml      : true,
         version    : 'v2.6'
@@ -72,10 +92,17 @@
     xhttp.send('user='+localStorage.getItem("result"));
     }
   </script>
-    <fb:login-button scope="public_profile,email"onlogin="checkLoginState();"></fb:login-button>
-    <br/><br/>
+    <br/>
+    <h1 style="margin-left: 30%;">FaceBook Login</h1>
+    <br/>
+    <div style="margin-left: 30%;" class="fb-login-button" data-width="" onlogin="checkLoginState();" scope="public_profile,email" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
+    <br/>
+    <h1 style="margin-left: 30%;">Get movies from posts</h1>
+    <br/>
     <button type="submit" value="submit" onclick="UserAction()">Submit</button>
-    <br/><br/>
+    <br/>
+    <h1 style="margin-left: 30%;">Disconnect from facebook</h1>
+    <br/>
     <button type="logout" value="logout" onclick="fbLogout()">Logout</button>
   </body>
 </html>
