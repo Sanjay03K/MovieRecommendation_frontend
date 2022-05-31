@@ -29,6 +29,12 @@
         font-size: 16px;
         border-radius: 0.3em;
         margin-left: 30%;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: slateblue; /* Green */
+        color: white;
       }
 
     </style>
@@ -86,7 +92,7 @@
          }
     };
     params.append("result",localStorage.getItem("result"))
-    xhttp.open("POST", "https://shielded-badlands-29343.herokuapp.com/recieve_posts_ui", true);
+    xhttp.open("POST", "https://obscure-taiga-67092.herokuapp.com/recieve_posts_ui", true);
     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     // xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send('user='+localStorage.getItem("result"));
